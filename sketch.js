@@ -20,7 +20,7 @@ var saraf2=[];
 var clocking = 0;
 var pontos=0;
 var imgNordeste = [];
-var imgBat = [];
+//var imgBat = [];
 var oi=0;
 var chances = 3;
 var band, coletadosX = 210, coletadosY = 30;

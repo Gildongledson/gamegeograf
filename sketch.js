@@ -20,7 +20,7 @@ var saraf2=[];
 var clocking = 0;
 var pontos=0;
 var imgNordeste = [];
-//var imgBat = [];
+var imgBat = [];
 var oi=0;
 var chances = 3;
 var band, coletadosX = 210, coletadosY = 30;
@@ -62,7 +62,7 @@ var yMenu7 =540;
 var posicaoX = 50;
 var posicaoY = 500;
 var px=66, py=238;
-var sarapf2X = 420, sarapf2Y= 520;
+var sarapf2X = 420, sarapf2Y= 480;
 var capturados = 0;
 var sX= 210, sY=360;
 var F, squareX=50, squareY=50;
@@ -134,14 +134,14 @@ function preload(){
   
 
       //inimigo bat
-      //imgBat [0] = loadImage("img/monster/__Bat02_Fly_000.png");
-      //imgBat [1] = loadImage("img/monster/__Bat02_Fly_001.png");
-      //imgBat [2] = loadImage("img/monster/__Bat02_Fly_002.png");
-      //imgBat [3] = loadImage("img/monster/__Bat02_Fly_003.png");
-      //imgBat [4] = loadImage("img/monster/__Bat02_Fly_004.png");
-      //imgBat [5] = loadImage("img/monster/__Bat02_Fly_005.png");
-      //imgBat [6] = loadImage("img/monster/__Bat02_Fly_006.png");
-      //imgBat [7] = loadImage("img/monster/__Bat02_Fly_007.png");
+      imgBat [0] = loadImage("img/monster/__Bat02_Fly_000.png");
+      imgBat [1] = loadImage("img/monster/__Bat02_Fly_001.png");
+      imgBat [2] = loadImage("img/monster/__Bat02_Fly_002.png");
+      imgBat [3] = loadImage("img/monster/__Bat02_Fly_003.png");
+      imgBat [4] = loadImage("img/monster/__Bat02_Fly_004.png");
+      imgBat [5] = loadImage("img/monster/__Bat02_Fly_005.png");
+      imgBat [6] = loadImage("img/monster/__Bat02_Fly_006.png");
+      imgBat [7] = loadImage("img/monster/__Bat02_Fly_007.png");
       
       //arara
       arara [0] = loadImage("img/parrot/parrot01.png");
@@ -337,6 +337,7 @@ function colide(){
       //foxdeath1 = int(dist(BatX1, BatY1, foxX, foxY));
       //foxdeath2 = int(dist(BatX2, BatY2, foxX, foxY));
   
+  
       
       stroke(0,0,255);
       F = int(dist(posicaoX,posicaoY,sXs[oi],sYs[oi]));
@@ -344,7 +345,6 @@ function colide(){
   
   if(foxdeath<20){
           loboGuara = 1;
-          chances++;
           foxSound.play();
           foxX= -600;
       } 
@@ -353,12 +353,16 @@ function colide(){
           posicaoY = 500;
           chances--;
           parrotSound.play();
+          loboGuara = 0;
+          foxX=350;
       }    
   if(morte1<20){
           posicaoX = 220;
           posicaoY = 500;
           chances--;
           parrotSound.play();
+          loboGuara = 0;
+          foxX=350;
       }
   
       if(morte<20){
@@ -366,12 +370,14 @@ function colide(){
           posicaoY = 500;
           chances--;
           parrotSound.play();
+          loboGuara = 0;
+          foxX=350;
       }
       if(d<20){
       capturados++;
       }
       
-      if(d2<20){
+      if(d2<10){
       capturados++;
       }
       
@@ -891,7 +897,8 @@ if(tela==5){
   
         //TELA 2 Fase ************************************************
 if(tela==6){
-    
+        background(mapFase2);
+        capturados = 0;
       //O tempo seria inserido nessa tela e na tela 6 onde ocorre a segunda fase *************************
       if(playsound()){
         soundAmb.pause();
@@ -900,8 +907,82 @@ if(tela==6){
         contador++;
         tempo=0;
       }
+  
+       //colisao nas bordas do mapa
+      if(posicaoX >= width-32){
+        posicaoX --;
+      }
+      if(posicaoX <= 0){
+        posicaoX ++;
+      }
+      if(posicaoY >= height-32){
+        posicaoY --;
+      }
+      if(posicaoY <= 85){
+        posicaoY ++;
+      }
+      
+      //image(mapFase2cima, 0, 80, 400, 500);
+      fill("white");
+      //rect(foxX, foxY, 50, 50, 15);
+  
+  
+      image(foxDown[contador%8], foxX-50, foxY, 50, 50);
+      image(imgGrade,foxX-50, foxY, 50, 50)
+  
       
   
+  
+      noFill();
+      fill(240);
+      rect(0, 0, 500, 80);
+      noFill();
+      textSize(20);
+      fill("black");
+      text("Chances= "+chances, 65,40);
+      text("Score= "+pontos, 400, 40);
+      fill("black");
+      stroke("orange")
+      text("Salve o lobo-guará \n e entregue a Sara!", width/2, 25);
+      noFill();
+      noStroke();
+      clocking++;
+      //text(varBand[oi],235,25);
+      //image(imgNordeste[oi],coletadosX,coletadosY, 50, 30);
+      //image(imgNordeste[oi],sXs[oi],sYs[oi], 50,30);
+  
+      if(chances == 0){
+        tela = 7;
+      }
+      //mostros inicio dos codigos
+  
+      if(instruct == 0){
+      image(Contrabandista[contador%27], BatX, BatY, 40, 40);
+      image(Contrabandista[contador%27], BatX1, BatY1, 40, 40);
+      image(Contrabandista[contador%27], BatX2, BatY2, 40, 40);
+      BatX++;
+      BatX1 = BatX1 + 2;
+      BatX2 = BatX2 + 2;
+        
+        if(BatX2 >= 500){
+          BatX2 = -80
+          BatY2 = random(80, 500);
+        }
+        if(BatX1 >= 500){
+          BatX1 = -80
+          BatY1 = random(80, 500);
+        }
+        if(BatX >= 500){
+          BatX = -20
+          BatY = random(80, 500);
+        }
+        if(tempo>5){
+        contador++;
+        tempo=0;
+        }if(contador >= 8){
+          contador = 0;
+        }
+        image(saraf2[contador%7],sarapf2X, sarapf2Y, 40, 40);
       if(capturados>=10){
       fill("white");
       rect(35,400, 410,100);
@@ -956,75 +1037,9 @@ if(tela==6){
           }
         }
       }
-  
-       //colisao nas bordas do mapa
-      if(posicaoX >= width-32){
-        posicaoX --;
-      }
-      if(posicaoX <= 0){
-        posicaoX ++;
-      }
-      if(posicaoY >= height-32){
-        posicaoY --;
-      }
-      if(posicaoY <= 85){
-        posicaoY ++;
-      }
-      background(mapFase2);
-      //image(mapFase2cima, 0, 80, 400, 500);
-      fill("white");
-      //rect(foxX, foxY, 50, 50, 15);
-      image(foxDown[contador%8], foxX-50, foxY, 50, 50);
-      image(imgGrade,foxX-50, foxY, 50, 50)
-      noFill();
-      fill(240);
-      rect(0, 0, 500, 80);
-      noFill();
-      textSize(20);
-      fill("black");
-      text("Chances= "+chances, 65,40);
-      text("Score= "+pontos, 400, 40);
-      clocking++;
-      //text(varBand[oi],235,25);
-      //image(imgNordeste[oi],coletadosX,coletadosY, 50, 30);
-      //image(imgNordeste[oi],sXs[oi],sYs[oi], 50,30);
-  
-      if(chances == 0){
-        tela = 7;
-      }
-      //mostros inicio dos codigos
-  
-      if(instruct == 0){
-      image(Contrabandista[contador%27], BatX, BatY, 40, 40);
-      image(Contrabandista[contador%27], BatX1, BatY1, 40, 40);
-      image(Contrabandista[contador%27], BatX2, BatY2, 40, 40);
-      BatX++;
-      BatX1 = BatX1 + 2;
-      BatX2 = BatX2 + 2;
-        
-        if(BatX2 >= 500){
-          BatX2 = -80
-          BatY2 = random(80, 500);
-        }
-        if(BatX1 >= 500){
-          BatX1 = -80
-          BatY1 = random(80, 500);
-        }
-        if(BatX >= 500){
-          BatX = -20
-          BatY = random(80, 500);
-        }
-        if(tempo>5){
-        contador++;
-        tempo=0;
-        }if(contador >= 8){
-          contador = 0;
-        }
       }
       
-  if(instruct == 0){
-        image(saraf2[contador%7],sarapf2X, sarapf2Y, 40, 40);
-      }
+  
       //final do codigo dos monstros
   
       //*******************************************
@@ -1113,6 +1128,10 @@ if(tela==6){
       else if(statusF==4){
         image(foxDown[contador%8], posicaoX-45 , posicaoY, 40, 40);
       }
+      if(posicaoY > 500){
+        tela = 8;
+      }
+         
   }
   
       if(tempo>10){

@@ -20,7 +20,7 @@ var saraf2=[];
 var clocking = 0;
 var pontos=0;
 var imgNordeste = [];
-var imgBat = [];
+//var imgBat = [];
 var oi=0;
 var chances = 3;
 var band, coletadosX = 210, coletadosY = 30;
@@ -134,14 +134,14 @@ function preload(){
   
 
       //inimigo bat
-      imgBat [0] = loadImage("img/monster/__Bat02_Fly_000.png");
-      imgBat [1] = loadImage("img/monster/__Bat02_Fly_001.png");
-      imgBat [2] = loadImage("img/monster/__Bat02_Fly_002.png");
-      imgBat [3] = loadImage("img/monster/__Bat02_Fly_003.png");
-      imgBat [4] = loadImage("img/monster/__Bat02_Fly_004.png");
-      imgBat [5] = loadImage("img/monster/__Bat02_Fly_005.png");
-      imgBat [6] = loadImage("img/monster/__Bat02_Fly_006.png");
-      imgBat [7] = loadImage("img/monster/__Bat02_Fly_007.png");
+      //imgBat [0] = loadImage("img/monster/__Bat02_Fly_000.png");
+      //imgBat [1] = loadImage("img/monster/__Bat02_Fly_001.png");
+      //imgBat [2] = loadImage("img/monster/__Bat02_Fly_002.png");
+      //imgBat [3] = loadImage("img/monster/__Bat02_Fly_003.png");
+      //imgBat [4] = loadImage("img/monster/__Bat02_Fly_004.png");
+      //imgBat [5] = loadImage("img/monster/__Bat02_Fly_005.png");
+      //imgBat [6] = loadImage("img/monster/__Bat02_Fly_006.png");
+      //imgBat [7] = loadImage("img/monster/__Bat02_Fly_007.png");
       
       //arara
       arara [0] = loadImage("img/parrot/parrot01.png");
